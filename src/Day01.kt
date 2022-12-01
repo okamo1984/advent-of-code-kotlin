@@ -15,7 +15,7 @@ fun part1() {
         var max = 0
         var candidate = 0
         while (true) {
-            val line = it.readLine()?.trim { char -> char == '\n' || char == '\r' } ?: break
+            val line = it.readLine()?.trimNewLine() ?: break
             if (line != "") {
                 candidate += line.toInt()
             } else {
@@ -38,7 +38,7 @@ fun part2() {
         val calories = mutableListOf<Int>()
         var sum = 0
         for (line in lines) {
-            val calorie = line.trim { char -> char == '\n' || char == '\r' }
+            val calorie = line.trimNewLine()
             if (calorie != "") {
                 sum += calorie.toInt()
             } else {
