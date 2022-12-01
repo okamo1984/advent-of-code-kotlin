@@ -1,5 +1,3 @@
-import java.io.File
-
 fun main() {
     println("part1")
     part1()
