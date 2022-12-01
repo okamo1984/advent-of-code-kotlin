@@ -1,17 +1,52 @@
+import java.io.File
+
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
+    println("part1")
+    part1()
+
+    println("part2")
+    part2()
+}
+
+fun part1() {
+    // https://kotlination.com/read-file-kotlin/
+    val bufferedReader = File("src", "Day01.txt").bufferedReader()
+    bufferedReader.use {
+        var max = 0
+        var candidate = 0
+        while (true) {
+            val line = it.readLine()?.trim { char -> char == '\n' || char == '\r' } ?: break
+            if (line != "") {
+                candidate += line.toInt()
+            } else {
+                if (candidate > max) {
+                    max = candidate
+                }
+                candidate = 0
+            }
+        }
+        if (candidate > max) {
+            max = candidate
+        }
+        println(max)
     }
+}
 
-    fun part2(input: List<String>): Int {
-        return input.size
+fun part2() {
+    val bufferedReader = File("src", "Day01.txt").bufferedReader()
+    bufferedReader.useLines {lines ->
+        val calories = mutableListOf<Int>()
+        var sum = 0
+        for (line in lines) {
+            val calorie = line.trim { char -> char == '\n' || char == '\r' }
+            if (calorie != "") {
+                sum += calorie.toInt()
+            } else {
+                calories.add(sum)
+                sum = 0
+            }
+        }
+        val top3 = calories.sortedDescending().slice(0..2)
+        println(top3.sum())
     }
-
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
-    val input = readInput("Day01")
-    println(part1(input))
-    println(part2(input))
 }
