@@ -27,9 +27,8 @@ fun part2() {
     val calories = mutableListOf<Int>()
     var sum = 0
     for (line in readInput("Day01")) {
-        val calorie = line.trimNewLine()
-        if (calorie != "") {
-            sum += calorie.toInt()
+        if (line != "") {
+            sum += line.toInt()
         } else {
             calories.add(sum)
             sum = 0
